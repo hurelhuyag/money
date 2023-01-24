@@ -1,4 +1,4 @@
-# Simplest Money Amount
+# Simplest Money Amount ![workflow](https://github.com/hurelhuyag/money/actions/workflows/ci.yaml/badge.svg)
 
 ## How to use
 
