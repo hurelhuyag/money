@@ -12,36 +12,65 @@ public final class MoneyAmount extends Number implements Comparable<MoneyAmount>
     public static final MoneyAmount ZERO = new MoneyAmount(0L);
     public static final MoneyAmount ONE = new MoneyAmount(100L);
 
+    /**
+     * Instantiate with internal long value without any modification
+     * @param value value to use at internally
+     */
     public static MoneyAmount valueOf(long value) {
         return new MoneyAmount(value);
     }
 
+    /**
+     * Instantiate same amount of primitive long type
+     * @param value value in primitive long type
+     * @return same amount in MoneyAmount type
+     */
+    public static MoneyAmount valueFrom(long value) {
+        return new MoneyAmount(value * PRECISION);
+    }
+
+    /**
+     * Instantiate same amount of primitive double type
+     * @param value value in primitive double type
+     * @return same amount in MoneyAmount type
+     */
+    public static MoneyAmount valueFrom(double value) {
+        return new MoneyAmount((long) (value * PRECISION));
+    }
+
+    /**
+     * Instantiate from string representation.
+     * @param value value in string
+     * @return parsed MoneyAmount value
+     * @throws NumberFormatException if passed value is not suitable to parsed into MoneyAmount
+     */
     public static MoneyAmount parse(String value) throws NumberFormatException {
         int i = value.lastIndexOf('.');
         if (i == 0) {
             throw new NumberFormatException("value missing before dot sign");
         }
-        if (i > 16 || (i == -1 && value.length() > 16)) {
+        int valueLen = value.length();
+        if (i > 16 || (i == -1 && valueLen > 16)) {
             throw new NumberFormatException("overflow");
         }
         if (i == -1) {
             return new MoneyAmount(Long.parseLong(value) * PRECISION);
         } else {
-            var bs = value.substring(i + 1);
-            var bsLen = bs.length();
-            var b = Long.parseLong(bs);
+            var bsLen = valueLen - i - 1;
+            var b = Long.parseLong(value, i + 1, valueLen, 10);
             switch (bsLen) {
                 case 0:
                     throw new NumberFormatException("value missing after dot sign");
                 case 1:
                     b *= 10L;
+                    break;
                 case 2:
                     break;
                 default:
                     throw new NumberFormatException("too much precision for money");
                     //b /= Math.pow(10, bsLen - 2);
             }
-            return new MoneyAmount(Long.parseLong(value.substring(0, i)) * PRECISION + b);
+            return new MoneyAmount(Long.parseLong(value, 0, i, 10) * PRECISION + b);
         }
     }
 

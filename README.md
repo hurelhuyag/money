@@ -37,14 +37,20 @@ var amount = MoneyAmount.parse("100.00");
 ```
 or from raw value
 ```java
-var amount = MoneyAmount.valueOf(10000);
+var amount = MoneyAmount.valueOf(100_00);
+```
+
+or from same amount of `long` or `double` value
+```java
+var amount = MoneyAmount.valueFrom(100L);
+var amount = MoneyAmount.valueFrom(100D);
 ```
 
 Using methods
 ```java
 var total = MoneyAmount.ZERO;
 for (var item : orderItems) {
-    total = total.add(item.price().multiply(MoneyAmount.valueOf(item.count()*MoneyAmount.PRECISION)));
+    total = total.add(item.price().multiply(MoneyAmount.valueFrom(item.count())));
 }
 var vat = total.divide(10, DivideMode.HALF_UP);
 
@@ -61,8 +67,15 @@ You can use those methods as you use with BigDecimal
 - MoneyAmount.multiply(MoneyAmount)
 - MoneyAmount.divide(MoneyAmount, DivideMode)
 - MoneyAmount.negate()
+- MoneyAmount.isNegative()
+- MoneyAmount.isPositive()
 - MoneyAmount.abs()
+- MoneyAmount.equals(MoneyAmount)
 - MoneyAmount.compareTo(MoneyAmount)
+- MoneyAmount.isGreaterThan(MoneyAmount)
+- MoneyAmount.isGreaterThanOrEqual(MoneyAmount)
+- MoneyAmount.isLowerThan(MoneyAmount)
+- MoneyAmount.isLowerThanOrEqual(MoneyAmount)
 - MoneyAmount.toString()
 
 ## Contribution

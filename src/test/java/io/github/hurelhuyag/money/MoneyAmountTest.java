@@ -1,5 +1,6 @@
 package io.github.hurelhuyag.money;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -20,6 +21,11 @@ public class MoneyAmountTest {
         assertEquals(1L, MoneyAmount.valueOf(101).longValue());
         assertEquals(1.01F, MoneyAmount.valueOf(101).floatValue());
         assertEquals(1.01D, MoneyAmount.valueOf(101).doubleValue());
+
+        assertEquals(MoneyAmount.valueFrom(0L), MoneyAmount.ZERO);
+        assertEquals(MoneyAmount.valueFrom(1L), MoneyAmount.ONE);
+        assertEquals(MoneyAmount.valueOf(100L), MoneyAmount.valueFrom(1L));
+        assertEquals(MoneyAmount.valueOf(110L), MoneyAmount.valueFrom(1.1D));
     }
 
     @Test
@@ -82,6 +88,14 @@ public class MoneyAmountTest {
 
         assertEquals(MoneyAmount.valueOf(5), MoneyAmount.valueOf(-5).negate());
         assertEquals(MoneyAmount.valueOf(-5), MoneyAmount.valueOf(5).negate());
+    }
+
+    @Disabled
+    @Test
+    public void multiplyWithPrecision() {
+        // I'm not sure this kind of calculation is needed in money
+        // Currently rounding not supported in multiply operation
+        assertEquals(MoneyAmount.valueOf(1), MoneyAmount.valueOf(9).multiply(MoneyAmount.valueOf(9))); // 0.09 * 0.09 = 0.0081
     }
 
     @Test
