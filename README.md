@@ -86,3 +86,5 @@ If you have something in your mind feel free to open a pull request or create an
 
 - More divide operation tests
 - Benchmark
+- Do we need this: 0.09 * 0.09 = 0.0081
+- Multi Operation Rounding. Reading material: http://www.sysmod.com/eurofaq.htm#ROUNDING, https://ec.europa.eu/economy_finance/publications/pages/publication1224_en.pdf
