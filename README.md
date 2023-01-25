@@ -7,14 +7,14 @@
 - No Currency requirement. Just Money Amount
 - Internally use `long` as money amount in cents
 - Simple To use
-- Fast because integer math operation. Event division is integer math
-- Every method mimics every BigDecimal. If you know BigDecimal, You know how to use.
+- Fast because of integer math operation. Even divide operation is integer math
+- Every method mimics every BigDecimal. If you know BigDecimal, You know how to use it.
 - Edge cases tested and compared with BigDecimal
 
 ## Requirement
 
 - Money amounts are coded in cents precision
-- Expecting 100 cents are 1 unit currency
+- Expecting 100 cents are 1 unit of currency
 - Divide operation has 3 choices for rounding. HALF_DOWN, HALF_UP, and HALF_EVEN
 
 ## How to use
@@ -54,7 +54,7 @@ System.out.println("VAT: " + vat);
 
 ### Available operations
 
-You can use those methods like you use with BigDecimal
+You can use those methods as you use with BigDecimal
 
 - MoneyAmount.add(MoneyAmount)
 - MoneyAmount.subtract(MoneyAmount)
@@ -67,7 +67,7 @@ You can use those methods like you use with BigDecimal
 
 ## Contribution
 
-If you have something in you mind feel free to open a pull request or create an issue.
+If you have something in your mind feel free to open a pull request or create an issue.
 
 ## To Do
 
